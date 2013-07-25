@@ -49,12 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-//$db['default']['username'] = 'root';
-$db['default']['username'] = 'gedelumb_wrdp1';
-//$db['default']['password'] = '';
-$db['default']['password'] = 'kQjq5cvfLeBU';
-//$db['default']['database'] = 'db_krs_web_android';
-$db['default']['database'] = 'gedelumb_krs_android';
+$db['default']['username'] = 'root';
+$db['default']['password'] = '';
+$db['default']['database'] = 'db_krs_web_android';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
