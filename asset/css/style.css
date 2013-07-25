@@ -1,0 +1,229 @@
+
+	::selection{ background-color: #E13300; color: white; }
+	::moz-selection{ background-color: #E13300; color: white; }
+	::webkit-selection{ background-color: #E13300; color: white; }
+
+	body {
+		background-color: #fff;
+		margin:0px auto;
+		font-size:12px;
+		font-family:'Tahoma',Arial;
+		color: #4F5155;
+		width:900px;
+		background-image:url(../images/bg-diagonal.png);
+	}
+
+	a {
+		color: #003399;
+		background-color: transparent;
+		font-weight: normal;
+	}
+
+	h1 {
+		color: #444;
+		background-color: transparent;
+		border-bottom: 1px solid #D0D0D0;
+		font-size: 19px;
+		font-weight: normal;
+		margin: 0 0 14px 0;
+		padding: 14px 15px 10px 15px;
+	}
+
+	#bg-line {
+		font-size: 12px;
+		background-color: #f9f9f9;
+		border: 1px solid #D0D0D0;
+		display: block;
+		margin: 14px 0 14px 0;
+		padding: 12px 10px 12px 10px;
+	}
+
+	.input-teks-login {
+		font-size: 12px;
+		background-color: #f9f9f9;
+		border: 1px solid #D0D0D0;
+		color: #002166;
+		display: block;
+		margin: 14px 0 14px 0;
+		padding: 12px 10px 12px 10px;
+		width:95%;
+	}
+
+	.input-read-only {
+		background-image:url(../images/bg-menu.jpg);
+		background-position:center;
+		background-repeat:repeat-x;
+		border: 1px solid #D0D0D0;
+		padding: 5px;
+	}
+
+	.link {
+		background-color: #000;
+		padding: 5px 8px 5px 8px;
+		-moz-border-radius: 20px; 
+		border-radius: 20px;
+		text-decoration:none;
+		color:#FFFFFF;
+		float:left;
+	}
+
+	.link:hover {
+		background-color: #FF3300;
+		padding: 5px 8px 5px 8px;
+		-moz-border-radius: 20px; 
+		border-radius: 20px;
+		text-decoration:none;
+		float:left;
+	}
+
+	.link2 {
+		background-color: #000;
+		padding: 5px 8px 5px 8px;
+		-moz-border-radius: 20px; 
+		border-radius: 20px;
+		text-decoration:none;
+		color:#FFFFFF;
+	}
+
+	.link2:hover {
+		background-color: #FF3300;
+		padding: 5px 8px 5px 8px;
+		-moz-border-radius: 20px; 
+		border-radius: 20px;
+		text-decoration:none;
+	}
+
+	.btn-kirim-login {
+		font-size: 12px;
+		background-color: #f9f9f9;
+		border: 1px solid #D0D0D0;
+		padding: 9px 10px 9px 10px;
+		background-image:url(../images/bg-menu.gif);
+		background-repeat:repeat-x;
+		background-position:center;
+		color:#FFFFFF;
+		cursor:pointer; 
+		-moz-border-radius: 6px; 
+		border-radius: 6px;
+	}
+
+	#body{
+		margin: 0 15px 0 15px;
+	}
+
+	#body h5{
+		margin:0px;
+		padding:0px;
+	}
+
+	#body h4{
+		margin:0px 0px 10px 0px;
+		padding:0px;
+	}
+	
+	p.footer{
+		text-align: right;
+		font-size: 11px;
+		border-top: 1px solid #D0D0D0;
+		padding: 10px 10px 20px 10px;
+		margin: 20px 0 0 0;
+		line-height:18px;
+	}
+	
+	#container{
+		margin: 10px;
+		border: 1px solid #D0D0D0;
+		-webkit-box-shadow: 0 0 8px #D0D0D0;
+		background-color:#FFFFFF;
+	}
+	
+	#menu{
+		background-image:url(../images/bg-menu.gif);
+		background-repeat:repeat-x;
+		padding:0px;
+		margin:0px auto;
+		border: 1px solid #D0D0D0;
+		-moz-border-radius: 6px; 
+		border-radius: 6px;
+	}
+	
+	#menu ul{
+		list-style:none;
+		margin:0px auto;
+		padding:0px;
+	}
+	
+	#menu li{
+		padding:10px 15px 10px 15px;
+		float:left;
+		border-right:1px solid #D0D0D0;
+	}
+	
+	#menu li:hover{
+		
+	}
+	
+	#menu li a{
+		text-decoration:none;
+		color:#fff;
+	}
+	
+	#menu li a:hover{
+		text-decoration:underline;
+		color:#FFFF00;
+	}
+	
+	#list{
+		padding:5px;
+	}
+	
+	#list ul{
+		margin:5px 10px 5px 30px;
+		padding:0px;
+	}
+	
+	#list li{
+		padding:5px 15px 5px 15px;
+	}
+	
+	.line-dot { clear: both; width:100%; height: 10px; border-bottom:1px dashed #333333; }
+	
+	.cleaner_h0 { clear: both; width:100%; height: 0px; }
+	.cleaner_h5 { clear: both; width:100%; height: 5px; }
+	.cleaner_h3 { clear: both; width:100%; height: 3px; }
+	.cleaner_h10 { clear: both; width:100%; height: 10px; }
+	.cleaner_h20 { clear: both; width:100%; height: 20px; }
+	.cleaner_h30 { clear: both; width:100%; height: 30px; }
+	.cleaner_h40 { clear: both; width:100%; height: 40px; }
+	.cleaner_h50 { clear: both; width:100%; height: 50px; }
+	.cleaner_h60 { clear: both; width:100%; height: 60px; }
+
+	.pagingpage-nomor{
+		background-color: #fff;
+		text-align:center;
+		width:20px;
+		padding: 3px;
+		border: 1px solid #CCCCCC;
+		float:left;
+		margin:1px;
+	}
+	.pagingpage-nomor a{
+		text-decoration:none;
+	}
+	.pagingpage-nomor a:hover{
+		text-decoration:underline;
+	}
+	
+	.pagingpage{
+		background-color: #fff;
+		padding: 3px;
+		border: 1px solid #CCCCCC;
+		float:left;
+		margin:1px;
+	}
+	.pagingpage a{
+		text-decoration:none;
+	}
+	.pagingpage a:hover{
+		text-decoration:underline;
+	}
