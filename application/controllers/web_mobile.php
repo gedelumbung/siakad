@@ -149,6 +149,7 @@ class Web_Mobile extends CI_Controller {
 			$bc['dosen_wali'] = $this->web_app_model->getDosenWali($bc['nim']);
 			$bc['tahun_ajaran'] = $this->web_app_model->getTahunAjaran();
 			$bc['detail_krs'] = $this->web_app_model->getDetailKrs($bc['nim']);
+			$bc['info'] = $this->web_app_model->getAllData("tbl_info");
 			$bc['beban_studi'] = beban_studi($bc['ipk']);
 			
 			$this->load->view('mobile_mahasiswa/bg_top');
@@ -390,17 +391,28 @@ class Web_Mobile extends CI_Controller {
 			$bc['detail_krs'] = $this->web_app_model->getDetailKrs($bc['nim']);
 			$bc['beban_studi'] = beban_studi($bc['ipk']);
 			
-			$bc['jadwal'] = $this->web_app_model->getDetailKrsPersetujuan($bc['nim'],$bc['program']);
 			$st = '';
 			$cek = $this->web_app_model->getSelectedData('tbl_perwalian_header','nim',$bc['nim']);
 			foreach($cek->result() as $c)
 			{
 				$st = $c->status;
 			}
-			
-			$this->load->view('mobile_mahasiswa/bg_top');
-			$this->load->view('mobile_mahasiswa/bg_menu',$bc);
-			$this->load->view('mobile_mahasiswa/jadwal',$bc);
+			if($st=="1")
+			{
+				$bc['jadwal'] = $this->web_app_model->getDetailKrsPersetujuan($bc['nim'],$bc['program']);
+				
+				$this->load->view('mobile_mahasiswa/bg_top');
+				$this->load->view('mobile_mahasiswa/bg_menu',$bc);
+				$this->load->view('mobile_mahasiswa/jadwal',$bc);
+			}
+			else
+			{
+				$bc['jadwal'] = $this->web_app_model->getJadwal($bc['nim'],$bc['program']);
+				
+				$this->load->view('mobile_mahasiswa/bg_top');
+				$this->load->view('mobile_mahasiswa/bg_menu',$bc);
+				$this->load->view('mobile_mahasiswa/bg_jadwal',$bc);
+			}
 		}
 		else
 		{

@@ -27,7 +27,6 @@
 		</p>
 		</div>';
 	}
-	echo $paginator;
 	?>
 	</div>
 	<br>
