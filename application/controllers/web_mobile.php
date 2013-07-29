@@ -191,6 +191,64 @@ class Web_Mobile extends CI_Controller {
 		}
 	}
 	
+	public function transkrip()
+	{
+		$cek = $this->session->userdata('logged_in');
+		$st = $this->session->userdata('stts');
+		if(!empty($cek) && $st=="mahasiswa")
+		{
+			$bc['nama'] = $this->session->userdata('nama');
+			$bc['status'] = $this->session->userdata('stts');
+			$bc['nim'] = $this->session->userdata('nim');
+			$bc['program'] = $this->session->userdata('program');
+			$bc['jurusan'] = $this->session->userdata('jurusan');
+			$bc['smt_skr'] = $this->web_app_model->getSemesterMax($bc['nim']);
+			$bc['ipk'] = $this->web_app_model->getIpk($bc['nim'],$bc['smt_skr']-1);
+			$bc['dosen_wali'] = $this->web_app_model->getDosenWali($bc['nim']);
+			$bc['tahun_ajaran'] = $this->web_app_model->getTahunAjaran();
+			$bc['detail_krs'] = $this->web_app_model->getDetailKrs($bc['nim']);
+			$bc['beban_studi'] = beban_studi($bc['ipk']);
+			
+			$bc['khs'] = $this->web_app_model->getSemester($bc['nim']);
+			$this->load->view('mobile_mahasiswa/bg_top');
+			$this->load->view('mobile_mahasiswa/bg_menu',$bc);
+			$this->load->view('mobile_mahasiswa/bg_semester',$bc);
+		}
+		else
+		{
+			$this->login();
+		}
+	}
+	
+	public function detail_transkrip($semester)
+	{
+		$cek = $this->session->userdata('logged_in');
+		$st = $this->session->userdata('stts');
+		if(!empty($cek) && $st=="mahasiswa")
+		{
+			$bc['nama'] = $this->session->userdata('nama');
+			$bc['status'] = $this->session->userdata('stts');
+			$bc['nim'] = $this->session->userdata('nim');
+			$bc['program'] = $this->session->userdata('program');
+			$bc['jurusan'] = $this->session->userdata('jurusan');
+			$bc['smt_skr'] = $this->web_app_model->getSemesterMax($bc['nim']);
+			$bc['ipk'] = $this->web_app_model->getIpk($bc['nim'],$bc['smt_skr']-1);
+			$bc['dosen_wali'] = $this->web_app_model->getDosenWali($bc['nim']);
+			$bc['tahun_ajaran'] = $this->web_app_model->getTahunAjaran();
+			$bc['detail_krs'] = $this->web_app_model->getDetailKrs($bc['nim']);
+			$bc['beban_studi'] = beban_studi($bc['ipk']);
+			
+			$bc['khs'] = $this->web_app_model->getNilaiTranskrip($bc['nim'],$semester);
+			$this->load->view('mobile_mahasiswa/bg_top');
+			$this->load->view('mobile_mahasiswa/bg_menu',$bc);
+			$this->load->view('mobile_mahasiswa/bg_khs',$bc);
+		}
+		else
+		{
+			$this->login();
+		}
+	}
+	
 	public function akun()
 	{
 		$cek = $this->session->userdata('logged_in');

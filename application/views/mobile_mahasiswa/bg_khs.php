@@ -83,8 +83,8 @@
    <footer data-role="footer" data-theme="a">
    <div data-role="navbar" data-theme="a">
 		<ul>
-			<li><a href="<?php echo base_url(); ?>web_mobile/home" data-role="button" data-theme="a" data-icon="home">Beranda</a></li>
-			<li><a href="<?php echo base_url(); ?>web_mobile/jadwal" data-role="button" data-theme="a" data-icon="grid">Jadwal Kuliah</a></li>
+			<li><a href="<?php echo base_url(); ?>web_mobile/transkrip" data-role="button" data-theme="a" data-icon="home">Transkrip</a></li>
+			<li><a href="<?php echo base_url(); ?>web_mobile/khs" data-role="button" data-theme="a" data-icon="grid">KHS</a></li>
 			<li><a href="<?php echo base_url(); ?>web_mobile/logout" data-role="button" data-theme="a" data-icon="delete">Log Out</a></li>
 		</ul>
 	</div>

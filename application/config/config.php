@@ -14,8 +14,8 @@
 | path to your installation.
 |
 */
-//$config['base_url']	= 'http://localhost/krs/';
-$config['base_url']	= 'http://krs.gedelumbung.com/';
+$config['base_url']	= 'http://localhost/krs/';
+//$config['base_url']	= 'http://krs.gedelumbung.com/';
 
 /*
 |--------------------------------------------------------------------------

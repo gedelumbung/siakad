@@ -10,29 +10,22 @@
 			<li>Prodi : <?php echo $jurusan; ?></li>
 			<li data-role="list-divider"></li>
 	</ul>
-	<div data-role="collapsible-set" data-theme="a" data-content-theme="c">
-   	<?php
-	foreach($jadwal->result_array() as $d)
+	<br>
+	<ul data-role="listview" data-theme="c" data-dividertheme="a"> 
+	<?php
+	$st='';
+	$tot_nxb=0;	
+	$tot_sks=0;
+	$no=1;
+	foreach($khs->result_array() as $value)
 	{
-
-		echo '<div data-role="collapsible">
-		<h3>'.$d['nama_mk'].'</h3>
-		<p>
-		<table>
-			<tr valign="top"><td width=100>Kode MK</td><td width=10> : </td><td>'.$d['kd_mk'].'</td></tr>
-			<tr valign="top"><td>Mata Kuliah</td><td> : </td><td>'.$d['nama_mk'].'</td></tr>
-			<tr valign="top"><td>Nama Dosen</td><td> : </td><td>'.$d['nama_dosen'].'</td></tr>
-			<tr valign="top"><td>Kode Dosen</td><td> : </td><td>'.$d['kd_dosen'].'</td></tr>
-			<tr valign="top"><td>Semester</td><td> : </td><td>'.$d['semester'].'</td></tr>
-			<tr valign="top"><td>Jumlah SKS</td><td> : </td><td>'.$d['jum_sks'].'</td></tr>
-			<tr valign="top"><td>Jadwal</td><td> : </td><td>'.$d['jadwal'].'</td></tr>
-			</table>
-		</p>
-		</div>';
+		echo '<li data-theme="a"><a href="'.base_url().'web_mobile/detail_transkrip/'.$value['semester_ditempuh'].'">Semester '.$value['semester_ditempuh'].'</a></li> ';
 	}
+	
 	?>
-	</div>
-	<br />
+	<li data-role="list-divider"></li>
+	</ul>
+	<br>
 		<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="a"> 
 			<li data-role="list-divider">Bantuan / Support</li> 
 			<li>NB : Hubungi bagian SISFO Kampus jika mengalami kesulitan proses log in atau permasalahan teknis lainnya</li> 

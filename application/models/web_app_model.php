@@ -127,6 +127,28 @@ class Web_App_Model extends CI_Model {
 		ORDER BY t_n.semester_ditempuh');
 	}
 	
+	//query transkrip nilai
+	public function getNilaiTranskrip($nim,$semester)
+	{
+		return $this->db->query('SELECT t_n.nim, tbl_mahasiswa.nama_mahasiswa, t_n.kd_mk, t_n.nama_mk, t_n.semester_ditempuh, 
+		t_n.jum_sks, t_n.grade, tbl_bobot.bobot, (
+		t_n.jum_sks * tbl_bobot.bobot) AS NxH FROM
+		(SELECT tbl_nilai.nim, tbl_nilai.kd_mk, tbl_mk.nama_mk, tbl_mk.jum_sks, tbl_nilai.semester_ditempuh, tbl_nilai.grade
+		FROM tbl_nilai LEFT JOIN tbl_mk ON tbl_nilai.kd_mk= tbl_mk.kd_mk
+		WHERE tbl_nilai.nim = "'.$nim.'" and semester_ditempuh="'.$semester.'") as t_n
+		LEFT JOIN tbl_bobot ON tbl_bobot.nilai = t_n.grade
+		LEFT JOIN tbl_mahasiswa ON t_n.nim = tbl_mahasiswa.nim
+		ORDER BY t_n.semester_ditempuh');
+	}
+	
+	//query transkrip nilai
+	public function getSemester($nim)
+	{
+		return $this->db->query('SELECT tbl_nilai.nim, tbl_nilai.kd_mk, tbl_mk.nama_mk, tbl_mk.jum_sks, tbl_nilai.semester_ditempuh, tbl_nilai.grade
+		FROM tbl_nilai LEFT JOIN tbl_mk ON tbl_nilai.kd_mk= tbl_mk.kd_mk
+		WHERE tbl_nilai.nim = "'.$nim.'" group by semester_ditempuh');
+	}
+	
 	//query mengambil jumlah ipk
 	public function getIpk($nim,$smt_terakhir)
 	{
