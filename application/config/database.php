@@ -50,8 +50,8 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-$db['default']['password'] = '';
-$db['default']['database'] = 'db_krs_web_android';
+$db['default']['password'] = 'root';
+$db['default']['database'] = 'krs';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

@@ -138,10 +138,7 @@ class Mahasiswa extends CI_Controller {
 				}
 				$this->web_app_model->deleteKrs($nim,$smt);
 				$this->web_app_model->insertKrs($data_header,$data_detail);
-				$this->session->set_flashdata('save_krs', '
-				<p style="padding:10px; background-color:#0BE0F6; text-align:center; margin:0px;">
-				Kartu Rencana Studi berhasil disimpan...!!! Silahkan menghubungi bagian 
-				administrasi untuk melakukan pembayaran.</p>');
+				$this->session->set_flashdata('save_krs', '<p style="padding:10px; background-color:#0BE0F6; text-align:center; margin:0px;">Kartu Rencana Studi berhasil disimpan...!!! Silahkan menghubungi bagian administrasi untuk melakukan pembayaran.</p>');
 				header('location:'.base_url().'mahasiswa/krs');
 			}
 			else{

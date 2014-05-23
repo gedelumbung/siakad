@@ -8,8 +8,7 @@
 		?>
 		
 		<p>
-		Selamat Datang di Sistem Perwalian Intranet Online STIKOM PGRI Banyuwangi.
-Setelah melakukan login pertama kali ke Sistem Perwalian Intranet Online ini, harap segera melakukan pergantian password pada menu Pengaturan Akun, guna menanggulangi hal-hal yang tidak diinginkan.
+		Selamat Datang di Sistem Perwalian Kampus Naskeleng. Setelah melakukan login pertama kali ke Sistem Perwalian Intranet Online ini, harap segera melakukan pergantian password pada menu Pengaturan Akun, guna menanggulangi hal-hal yang tidak diinginkan.
 		</p>
 		
 		<div id="list">

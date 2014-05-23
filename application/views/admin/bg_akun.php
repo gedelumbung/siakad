@@ -31,7 +31,7 @@
 	<tr>
 		<td></td>
 		<td></td>
-		<td><input type="submit" value="Simpan Data" disabled="disabled" /></td>
+		<td><input type="submit" value="Simpan Data" /></td>
 	</tr>
 		
 	
