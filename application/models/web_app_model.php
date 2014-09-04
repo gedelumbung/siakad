@@ -237,8 +237,7 @@ class Web_App_Model extends CI_Model {
 		ON tbl_perwalian_header.nim = detail.nim 
 		where detail.kelas_program="'.$kelas_program.'" group by kd_jadwal
 		) as d
-		on a.kd_jadwal=d.kd_jadwal
-		where b.semester="'.$semester.'"');
+		on a.kd_jadwal=d.kd_jadwal order by b.kd_mk, b.semester ASC');
 	}
 	
 	//query untuk mengambil semua jadwal dari admin

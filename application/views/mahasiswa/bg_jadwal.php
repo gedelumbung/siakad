@@ -19,7 +19,7 @@
 function PilihMataKuliah(chk) {
 	var jumlahSKS=0;	
 	var checkboxdipilih = chk.name;
-	var beban=document.datafrs.beban_study.value;
+	var beban=24;
 	var temp=document.datafrs.jumlahsks.value;
 	for(i=0 ; i<document.datafrs.length; i++) 
 	{
@@ -129,7 +129,7 @@ function PilihMataKuliah(chk) {
 	</tr>
 	</table>
 		<table border="1" width="100%" style="border-collapse: collapse;" cellpadding="5">
-		<td colspan="12" align="center" bgcolor="#fff" style="text-transform:uppercase;"><strong>Mata Kuliah yang Akan Ditempuh Pada Semester Ini :</strong></td>
+		<td colspan="13" align="center" bgcolor="#fff" style="text-transform:uppercase;"><strong>Mata Kuliah yang Akan Ditempuh Pada Semester Ini :</strong></td>
 		</tr>
 		<th align="center">Kode MK</th>
 		<th align="center">Mata Kuliah</th>
@@ -141,8 +141,9 @@ function PilihMataKuliah(chk) {
 		<th align="center">Quota</th>
 		<th align="center">Peserta</th>
 		<th align="center">Calon Peserta</th>
+		<th align="center">Nilai</th>
 		<th align="center">*</th>
-			<?php Tampilkan_Mata_Kuliah($jadwal); ?>
+			<?php Tampilkan_Mata_Kuliah($jadwal, $nilai); ?>
 		</table>
 		<?php Tampilkan_Detail_Frs($detail_krs); ?>	
 		<p><input name="tombolsimpan" class="btn-kirim-login" type="submit" value="Simpan Data Kartu Rencana Studi" disabled=true; /></p>	
@@ -172,59 +173,77 @@ function Tampilkan_Detail_Frs($frsdetail){
 	<script language="javascript">'.$checkboxvalue.'</script>'; 
 }
 
-function Tampilkan_Mata_Kuliah($jdwl)
+function Tampilkan_Mata_Kuliah($jdwl, $nilai)
 {
 	$rows=array();
 	$index=0;
 	$temp='';
 	$acuan=0;
 	$rowspan=1;
+	$saved_kode_mk = array();
+	$saved_nilai = array();
+    foreach ($nilai->result_array() as $nl) {
+        array_push($saved_kode_mk, $nl['kd_mk']);
+        array_push($saved_nilai, $nl['grade']);
+    }
 	foreach ($jdwl->result_array() as $value) 
 	{
+	    $taken = "#fff";
+		$disabled ='';
+		$nilai ='-';
+	    for($a=0; $a<count($saved_kode_mk); $a++)
+	    {
+	        if($saved_kode_mk[$a] == $value['kd_mk'])
+	        {
+	            $taken = "#ccc";
+			    $disabled ='disabled="disabled"';
+		        $nilai =$saved_nilai[$a];
+	        }
+	    }
 		if(($temp=='') || ($value['kd_mk']!=$temp)) {			
-			$rows[$index] = '<tr>
-				<td align="center" rowspan="1">'.$value['kd_mk'].'</td>
+			$rows[$index] = '<tr bgcolor="'.$taken.'">
+				<td align="center" rowspan="1">'.$taken.'</td>
 				<td rowspan="1" id="'.'nama_'.$value['kd_mk'].'">'.$value['nama_mk'].'</td>
 				<td align="center" rowspan="1">'.$value['semester'].'</td>
 				<td align="center" rowspan="1" id="id'.$value['kd_mk'].'">'.$value['jum_sks'].'</td>';
 				
 				$rowspan=1;				
 				$acuan=$index;
-			}else if($value['kd_mk']==$temp) {
-				$rows[$index] = '<tr>';
-				$rowspan++;
-			}
+		}else if($value['kd_mk']==$temp) {
+			$rows[$index] = '<tr bgcolor="'.$taken.'">';
+			$rowspan++;
+		}
 
-			$rows[$acuan]=str_replace('rowspan="'.($rowspan-1).'"', 'rowspan="'.$rowspan.'"', $rows[$acuan]);
-			$peserta = isset($value['Peserta']) ? $value['Peserta']:'0';
-			$calonpeserta = isset($value['CalonPeserta']) ? $value['CalonPeserta']:'0';
+		$rows[$acuan]=str_replace('rowspan="'.($rowspan-1).'"', 'rowspan="'.$rowspan.'"', $rows[$acuan]);
+		$peserta = isset($value['Peserta']) ? $value['Peserta']:'0';
+		$calonpeserta = isset($value['CalonPeserta']) ? $value['CalonPeserta']:'0';
+	
+		if($peserta >= $value['kapasitas'])
+			$disabled ='disabled="disabled"';
 		
-			$disabled ='';
-			if($peserta >= $value['kapasitas'])
-				$disabled ='disabled="disabled"';
+		$linkpeserta = $peserta;
+		if($peserta >0)
+		$linkpeserta = '<a href="'.base_url().'mahasiswa/peserta/'.$value['kd_jadwal'].'_1
+		/" title="Daftar Peserta Mata Kuliah '.$value['nama_mk'].'  -  Dosen '.$value['nama_dosen'].'" rel="example_group" class="link2">'
+			.$peserta.'</a>';
 			
-			$linkpeserta = $peserta;
-			if($peserta >0)
-			$linkpeserta = '<a href="'.base_url().'mahasiswa/peserta/'.$value['kd_jadwal'].'_1
-			/" title="Daftar Peserta Mata Kuliah '.$value['nama_mk'].'  -  Dosen '.$value['nama_dosen'].'" rel="example_group" class="link2">'
-				.$peserta.'</a>';
-				
-			$linkcalonpeserta = $calonpeserta;
-			if($calonpeserta >0)
-			$linkcalonpeserta = '<a href="'.base_url().'mahasiswa/peserta/'.$value['kd_jadwal'].'_0
-			/" title="Daftar Calon Peserta Mata Kuliah '.$value['nama_mk'].'  -  Dosen '.$value['nama_dosen'].'" rel="example_group" class="link2">	
-			'.$calonpeserta.'</a>';
-						
-			$rows[$index] .='<td id="'.'cell_'.$value['kd_mk'].'_'.$value['kelas'].'">'.$value['kd_dosen'].'</td><td>'.$value['nama_dosen'].'</td>
-				<td align="center">'.$value['kelas'].'</td>
-				<td align="center" id="jdwl_'.$value['kd_jadwal'].'">'.$value['jadwal'].'</td>
-				<td align="center">'.$value['kapasitas'].'</td>
-				<td align="center">'.$linkpeserta.'</td>
-				<td align="center">'.$linkcalonpeserta.'</td>
-				<td align="center">
-				<input type="checkbox" name="chk_'.$value['kd_mk'].'_'.$value['kd_jadwal'].'" value="ON" onchange="javascript:PilihMataKuliah(this);" '.$disabled.'/></td></tr>';
-			$index++;
-			$temp=$value['kd_mk'];
+		$linkcalonpeserta = $calonpeserta;
+		if($calonpeserta >0)
+		$linkcalonpeserta = '<a href="'.base_url().'mahasiswa/peserta/'.$value['kd_jadwal'].'_0
+		/" title="Daftar Calon Peserta Mata Kuliah '.$value['nama_mk'].'  -  Dosen '.$value['nama_dosen'].'" rel="example_group" class="link2">	
+		'.$calonpeserta.'</a>';
+					
+		$rows[$index] .='<td id="'.'cell_'.$value['kd_mk'].'_'.$value['kelas'].'">'.$value['kd_dosen'].'</td><td>'.$value['nama_dosen'].'</td>
+			<td align="center">'.$value['kelas'].'</td>
+			<td align="center" id="jdwl_'.$value['kd_jadwal'].'">'.$value['jadwal'].'</td>
+			<td align="center">'.$value['kapasitas'].'</td>
+			<td align="center">'.$linkpeserta.'</td>
+			<td align="center">'.$linkcalonpeserta.'</td>
+			<td align="center">'.$nilai.'</td>
+			<td align="center">
+			<input type="checkbox" name="chk_'.$value['kd_mk'].'_'.$value['kd_jadwal'].'" value="ON" onchange="javascript:PilihMataKuliah(this);" '.$disabled.'/></td></tr>';
+		$index++;
+		$temp=$value['kd_mk'];
 	}		
 	foreach($rows as $row)
 	{
