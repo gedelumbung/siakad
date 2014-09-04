@@ -238,7 +238,7 @@ class Web_App_Model extends CI_Model {
 		where detail.kelas_program="'.$kelas_program.'" group by kd_jadwal
 		) as d
 		on a.kd_jadwal=d.kd_jadwal
-		where a.kd_mk not in(select kd_mk from tbl_nilai where nim="'.$nim.'" AND grade NOT IN("E","T")) and a.kelas_program="'.$kelas_program.'"');
+		where b.semester=1 ');
 	}
 	
 	//query untuk mengambil semua jadwal dari admin
