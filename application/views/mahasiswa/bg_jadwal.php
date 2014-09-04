@@ -103,9 +103,8 @@ function PilihMataKuliah(chk) {
 	<tr>
 		<td>Nama</td>
 		<td><input name="nama_mhs" value="<?php echo $nama; ?>" type="text" readonly="readonly"   size="35" class="input-read-only"/></td>
-		<td>IP Semester Lalu/Beban Study Maks</td>
-		<td><input name="ip" value="<?php echo $ipk; ?>" type="text" size="10" readonly="readonly" class="input-read-only" />
-		/ <input name="beban_study" value="<?php echo $beban_studi; ?>" type="text" size="10" readonly="readonly" class="input-read-only" />
+		<td>IP Semester Lalu</td>
+		<td><input name="ip" value="<?php echo $ipk; ?>" type="text" size="35" readonly="readonly" class="input-read-only" />
 		</td>
 				
 	</tr>

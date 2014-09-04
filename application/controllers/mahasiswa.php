@@ -57,7 +57,7 @@ class Mahasiswa extends CI_Controller {
 			$bc['bio'] = $this->load->view('mahasiswa/bio', $bc, true);
 			
 			$kls = $this->session->userdata('program');
-			$bc['jadwal'] = $this->web_app_model->getJadwal($bc['nim'],$kls);
+			$bc['jadwal'] = $this->web_app_model->getJadwal($bc['nim'],$kls,$bc['smt_skr']);
 			$bc['detailfrs'] = $this->web_app_model->getDetailKrsPersetujuan($bc['nim'],$bc['program']);
 			
 			$st = '';

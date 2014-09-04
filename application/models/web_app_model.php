@@ -220,7 +220,7 @@ class Web_App_Model extends CI_Model {
 	}
 	
 	//query jadwal
-	public function getJadwal($nim,$kelas_program)
+	public function getJadwal($nim,$kelas_program,$semester)
 	{
 		return $this->db->query('SELECT 
 		a.kd_jadwal,b.nama_mk,b.kd_mk,b.semester,b.jum_sks,a.kapasitas,a.kelas,c.kd_dosen,a.jadwal,d.Peserta,d.CalonPeserta,c.nama_dosen FROM 
@@ -238,7 +238,7 @@ class Web_App_Model extends CI_Model {
 		where detail.kelas_program="'.$kelas_program.'" group by kd_jadwal
 		) as d
 		on a.kd_jadwal=d.kd_jadwal
-		where b.semester=1 ');
+		where b.semester="'.$semester.'"');
 	}
 	
 	//query untuk mengambil semua jadwal dari admin
