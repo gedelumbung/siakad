@@ -1,29 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.11.1deb2
+-- version 3.5.8.1deb1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: May 23, 2014 at 11:40 AM
--- Server version: 5.5.35
--- PHP Version: 5.4.4-14+deb7u5
+-- Inang: localhost
+-- Waktu pembuatan: 05 Sep 2014 pada 06.38
+-- Versi Server: 5.5.32-0ubuntu0.13.04.1
+-- Versi PHP: 5.4.9-4ubuntu2.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 --
--- Database: `krs`
+-- Basis data: `siakad`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_admin`
+-- Struktur dari tabel `tbl_admin`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_admin` (
@@ -33,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `tbl_admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_admin`
+-- Dumping data untuk tabel `tbl_admin`
 --
 
 INSERT INTO `tbl_admin` (`username`, `nama_lengkap`) VALUES
@@ -42,7 +36,7 @@ INSERT INTO `tbl_admin` (`username`, `nama_lengkap`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_bobot`
+-- Struktur dari tabel `tbl_bobot`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_bobot` (
@@ -51,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `tbl_bobot` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Dumping data for table `tbl_bobot`
+-- Dumping data untuk tabel `tbl_bobot`
 --
 
 INSERT INTO `tbl_bobot` (`bobot`, `nilai`) VALUES
@@ -69,7 +63,7 @@ INSERT INTO `tbl_bobot` (`bobot`, `nilai`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_dosen`
+-- Struktur dari tabel `tbl_dosen`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_dosen` (
@@ -80,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `tbl_dosen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_dosen`
+-- Dumping data untuk tabel `tbl_dosen`
 --
 
 INSERT INTO `tbl_dosen` (`kd_dosen`, `nidn`, `nama_dosen`) VALUES
@@ -89,7 +83,7 @@ INSERT INTO `tbl_dosen` (`kd_dosen`, `nidn`, `nama_dosen`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_dosen_wali`
+-- Struktur dari tabel `tbl_dosen_wali`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_dosen_wali` (
@@ -99,16 +93,17 @@ CREATE TABLE IF NOT EXISTS `tbl_dosen_wali` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_dosen_wali`
+-- Dumping data untuk tabel `tbl_dosen_wali`
 --
 
 INSERT INTO `tbl_dosen_wali` (`nim`, `kd_dosen`) VALUES
-('0960011001', 'D001');
+('0960011001', 'D001'),
+('1360011001', 'D001');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_info`
+-- Struktur dari tabel `tbl_info`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_info` (
@@ -120,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `tbl_info` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
--- Dumping data for table `tbl_info`
+-- Dumping data untuk tabel `tbl_info`
 --
 
 INSERT INTO `tbl_info` (`kd_info`, `judul`, `waktu_post`, `isi`) VALUES
@@ -132,7 +127,7 @@ INSERT INTO `tbl_info` (`kd_info`, `judul`, `waktu_post`, `isi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_jadwal`
+-- Struktur dari tabel `tbl_jadwal`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_jadwal` (
@@ -145,24 +140,30 @@ CREATE TABLE IF NOT EXISTS `tbl_jadwal` (
   `kelas_program` varchar(10) NOT NULL,
   `kelas` varchar(10) NOT NULL,
   PRIMARY KEY (`kd_jadwal`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
--- Dumping data for table `tbl_jadwal`
+-- Dumping data untuk tabel `tbl_jadwal`
 --
 
 INSERT INTO `tbl_jadwal` (`kd_jadwal`, `kd_mk`, `kd_dosen`, `kd_tahun`, `jadwal`, `kapasitas`, `kelas_program`, `kelas`) VALUES
-(1, '1111305', 'D001', 'gnp-11/12', 'Kamis / 08.00-10.00 / ruang 3.3', 80, 'sore', 'A'),
-(2, '1111305', 'D001', 'gnp-11/12', 'Selasa / 10.00-12.00 / ruang 21', 30, 'pagi', 'B'),
-(3, '1111306', 'D001', 'gnp-11/12', 'Senin / 08.00-10.00 / Ruang 3.3', 30, 'pagi', 'A'),
-(4, '1111201', 'D001', 'gnp-11/12', 'Senin / 08.00-11.00 / Ruang 2.3', 50, 'pagi', 'A'),
-(5, '1111201', 'D001', 'gnp-11/12', 'Senin / 08.00-11.00 / Ruang 1.3', 40, 'pagi', 'B'),
-(6, '1111305', 'D001', 'gnp-11/12', 'Jumat / 10.00 -12.00 / ruang 1.3', 25, 'pagi', 'B');
+(2, '1111305', 'D001', '1', 'Selasa / 10.00-12.00 / ruang 21', 30, 'pagi', 'B'),
+(3, '1111306', 'D001', '1', 'Senin / 08.00-10.00 / Ruang 3.3', 30, 'pagi', 'A'),
+(4, '1111201', 'D001', '1', 'Senin / 08.00-11.00 / Ruang 2.3', 50, 'pagi', 'A'),
+(5, '1111201', 'D001', '1', 'Senin / 08.00-11.00 / Ruang 1.3', 40, 'pagi', 'B'),
+(6, '1111305', 'D001', '1', 'Jumat / 10.00 -12.00 / ruang 1.3', 25, 'pagi', 'B'),
+(8, '1111206', 'D001', '1', 'Jumat / 10.00-12.00 / 1.2', 30, 'pagi', 'A'),
+(9, '1111206', 'D001', '1', 'Kamis / 10.00-12.00 / 1.2', 30, 'pagi', 'A'),
+(10, '1111305', 'D001', '1', 'Senin / 10.00-12.00 / 1.2', 30, 'pagi', 'A'),
+(11, '1111206', 'D001', '1', 'Senin / 10.00-12.00 / 1.2', 30, 'pagi', 'A'),
+(12, '1111334', 'D001', '1', 'Senin / 10.00-12.00 / 1.2', 30, 'pagi', 'A'),
+(13, '1111207', 'D001', '1', 'Senin / 10.00-12.00 / 1.2', 30, 'pagi', 'A'),
+(14, '1111312', 'D001', '1', 'Senin / 10.00-12.00 / 1.2', 30, 'pagi', 'A');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_login`
+-- Struktur dari tabel `tbl_login`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_login` (
@@ -173,18 +174,19 @@ CREATE TABLE IF NOT EXISTS `tbl_login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_login`
+-- Dumping data untuk tabel `tbl_login`
 --
 
 INSERT INTO `tbl_login` (`username`, `password`, `stts`) VALUES
 ('0960011001', '47bf4a2e7ca22f04272a3a483e84df7e', 'mahasiswa'),
+('1360011001', 'bf5cc98b103bf23650a91e18bf00c8c7', 'mahasiswa'),
 ('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin'),
 ('D001', 'd5cbf528f740b502b79241ff873ce6c5', 'dosen');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_mahasiswa`
+-- Struktur dari tabel `tbl_mahasiswa`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_mahasiswa` (
@@ -197,16 +199,17 @@ CREATE TABLE IF NOT EXISTS `tbl_mahasiswa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_mahasiswa`
+-- Dumping data untuk tabel `tbl_mahasiswa`
 --
 
 INSERT INTO `tbl_mahasiswa` (`nim`, `nama_mahasiswa`, `angkatan`, `jurusan`, `kelas_program`) VALUES
-('0960011001', 'Bondan Galau', 2009, 'Teknik Informatika', 'pagi');
+('0960011001', 'Bondan Galau', 2009, 'Teknik Informatika', 'pagi'),
+('1360011001', 'Ernes Prakasa', 2013, 'Teknik Informatika', 'sore');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_mk`
+-- Struktur dari tabel `tbl_mk`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_mk` (
@@ -220,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `tbl_mk` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_mk`
+-- Dumping data untuk tabel `tbl_mk`
 --
 
 INSERT INTO `tbl_mk` (`kd_mk`, `nama_mk`, `jum_sks`, `semester`, `prasyarat_mk`, `kode_jur`) VALUES
@@ -322,7 +325,7 @@ INSERT INTO `tbl_mk` (`kd_mk`, `nama_mk`, `jum_sks`, `semester`, `prasyarat_mk`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_nilai`
+-- Struktur dari tabel `tbl_nilai`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_nilai` (
@@ -335,43 +338,50 @@ CREATE TABLE IF NOT EXISTS `tbl_nilai` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_nilai`
+-- Dumping data untuk tabel `tbl_nilai`
 --
 
 INSERT INTO `tbl_nilai` (`nim`, `kd_mk`, `kd_dosen`, `kd_tahun`, `semester_ditempuh`, `grade`) VALUES
-('960011001', '1111303', '0200', '1-gnj-11/12', 1, 'A'),
-('960011001', '1111311', '0200', '1-gnj-11/12', 1, 'A'),
-('960011001', '1111205', '0200', '1-gnj-11/12', 1, 'A'),
-('960011001', '1111201', '0200', '1-gnj-11/12', 1, 'B'),
-('960011001', '1111502', '0200', '1-gnj-11/12', 1, 'A'),
-('960011001', '1111204', '0200', '1-gnj-11/12', 1, 'A'),
-('960011001', '1111304', '0200', '1-gnj-11/12', 2, 'A'),
-('960011001', '1111312', '0200', '1-gnj-11/12', 2, 'A'),
-('960011001', '1111317', '0200', '1-gnj-11/12', 2, 'A'),
-('960011001', '1111319', '0200', '1-gnj-11/12', 2, 'A'),
-('960011001', '1111202', '0200', '1-gnj-11/12', 2, 'A'),
-('960011001', '1111314', '0200', '1-gnj-11/12', 2, 'A'),
-('960011001', '1111203', '0200', '1-gnj-11/12', 3, 'B'),
-('960011001', '1111309', '0200', '1-gnj-11/12', 3, 'A'),
-('960011001', '1111315', '0200', '1-gnj-11/12', 3, 'A'),
-('960011001', '1111101', '0200', '1-gnj-11/12', 3, 'B'),
-('960011001', '1111206', '0200', '1-gnj-11/12', 3, 'A'),
-('960011001', '1111301', '0200', '1-gnj-11/12', 4, 'A'),
-('960011001', '1111310', '0200', '1-gnj-11/12', 4, 'B'),
-('960011001', '1111316', '0200', '1-gnj-11/12', 4, 'A'),
-('960011001', '1111501', '0200', '1-gnj-11/12', 4, 'A'),
-('960011001', '1111207', '0200', '1-gnj-11/12', 4, 'A'),
-('960011001', '1111308', '0200', '1-gnj-11/12', 5, 'A'),
-('960011001', '1111208', '0200', '1-gnj-11/12', 5, 'A'),
-('960011001', '1111102', '0200', '1-gnj-11/12', 4, 'A'),
-('960011001', '1111325', '0200', '1-gnj-11/12', 5, 'A'),
-('960011001', '1111332', '0200', '1-gnj-11/12', 3, 'A'),
-('960011001', '1111503', '0200', '1-gnj-11/12', 4, 'A');
+('0960011001', '1111303', '0200', '1-gnj-11/12', 1, 'A'),
+('0960011001', '1111311', '0200', '1-gnj-11/12', 1, 'A'),
+('0960011001', '1111205', '0200', '1-gnj-11/12', 1, 'A'),
+('0960011001', '1111201', '0200', '1-gnj-11/12', 1, 'B'),
+('0960011001', '1111502', '0200', '1-gnj-11/12', 1, 'A'),
+('0960011001', '1111204', '0200', '1-gnj-11/12', 1, 'A'),
+('0960011001', '1111304', '0200', '1-gnj-11/12', 2, 'A'),
+('0960011001', '1111312', '0200', '1-gnj-11/12', 2, 'A'),
+('0960011001', '1111317', '0200', '1-gnj-11/12', 2, 'A'),
+('0960011001', '1111319', '0200', '1-gnj-11/12', 2, 'A'),
+('0960011001', '1111202', '0200', '1-gnj-11/12', 2, 'A'),
+('0960011001', '1111314', '0200', '1-gnj-11/12', 2, 'A'),
+('0960011001', '1111203', '0200', '1-gnj-11/12', 3, 'B'),
+('0960011001', '1111309', '0200', '1-gnj-11/12', 3, 'A'),
+('0960011001', '1111315', '0200', '1-gnj-11/12', 3, 'A'),
+('0960011001', '1111101', '0200', '1-gnj-11/12', 3, 'B'),
+('0960011001', '1111206', '0200', '1-gnj-11/12', 3, 'A'),
+('0960011001', '1111301', '0200', '1-gnj-11/12', 4, 'A'),
+('0960011001', '1111310', '0200', '1-gnj-11/12', 4, 'B'),
+('0960011001', '1111316', '0200', '1-gnj-11/12', 4, 'A'),
+('0960011001', '1111501', '0200', '1-gnj-11/12', 4, 'A'),
+('0960011001', '1111207', '0200', '1-gnj-11/12', 4, 'A'),
+('0960011001', '1111308', '0200', '1-gnj-11/12', 5, 'A'),
+('0960011001', '1111208', '0200', '1-gnj-11/12', 5, 'A'),
+('0960011001', '1111102', '0200', '1-gnj-11/12', 4, 'A'),
+('0960011001', '1111325', '0200', '1-gnj-11/12', 5, 'A'),
+('0960011001', '1111332', '0200', '1-gnj-11/12', 3, 'A'),
+('0960011001', '1111503', '0200', '1-gnj-11/12', 4, 'A'),
+('1360011001', '1111306', 'D001', 'gnp-11/12', 1, 'A'),
+('1360011001', '1111201', 'D001', 'gnp-11/12', 1, 'A'),
+('1360011001', '1111305', 'D001', 'gnp-11/12', 1, 'A'),
+('1360011001', '1111206', 'D001', 'gnp-11/12', 1, 'A'),
+('1360011001', '1111334', 'D001', 'gnp-11/12', 1, 'A'),
+('1360011001', '1111207', 'D001', 'gnp-11/12', 1, 'A'),
+('0960011001', '1111306', 'D001', '1', 6, 'C');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_perwalian_detail`
+-- Struktur dari tabel `tbl_perwalian_detail`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_perwalian_detail` (
@@ -380,22 +390,28 @@ CREATE TABLE IF NOT EXISTS `tbl_perwalian_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_perwalian_detail`
+-- Dumping data untuk tabel `tbl_perwalian_detail`
 --
 
 INSERT INTO `tbl_perwalian_detail` (`nim`, `kd_jadwal`) VALUES
+('0960011001', 10),
 ('0960011001', 3),
-('0960011001', 4),
-('0960011001', 6);
+('0960011001', 12),
+('1360011001', 4),
+('1360011001', 11),
+('1360011001', 13),
+('1360011001', 10),
+('1360011001', 12);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_perwalian_header`
+-- Struktur dari tabel `tbl_perwalian_header`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_perwalian_header` (
   `nim` varchar(20) NOT NULL,
+  `kd_tahun` int(10) NOT NULL,
   `tgl_perwalian` varchar(20) NOT NULL,
   `tgl_persetujuan` varchar(20) DEFAULT NULL,
   `status` char(1) NOT NULL,
@@ -404,35 +420,34 @@ CREATE TABLE IF NOT EXISTS `tbl_perwalian_header` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_perwalian_header`
+-- Dumping data untuk tabel `tbl_perwalian_header`
 --
 
-INSERT INTO `tbl_perwalian_header` (`nim`, `tgl_perwalian`, `tgl_persetujuan`, `status`, `semester`) VALUES
-('0960011001', '2014-05-23', '', '0', '1');
+INSERT INTO `tbl_perwalian_header` (`nim`, `kd_tahun`, `tgl_perwalian`, `tgl_persetujuan`, `status`, `semester`) VALUES
+('0960011001', 1, '2014-09-05', '2014-09-05', '1', '6'),
+('1360011001', 1, '2014-09-05', '', '0', '1');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_thn_ajaran`
+-- Struktur dari tabel `tbl_thn_ajaran`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_thn_ajaran` (
-  `kd_tahun` varchar(20) NOT NULL,
+  `kd_tahun` int(10) NOT NULL AUTO_INCREMENT,
   `keterangan` varchar(20) DEFAULT NULL,
   `tgl_kul` varchar(20) DEFAULT NULL,
   `tgl_awal_perwalian` varchar(20) DEFAULT NULL,
   `tgl_akhir_perwalian` varchar(20) DEFAULT NULL,
   `stts` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`kd_tahun`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`kd_tahun`),
+  KEY `kd_tahun` (`kd_tahun`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `tbl_thn_ajaran`
+-- Dumping data untuk tabel `tbl_thn_ajaran`
 --
 
 INSERT INTO `tbl_thn_ajaran` (`kd_tahun`, `keterangan`, `tgl_kul`, `tgl_awal_perwalian`, `tgl_akhir_perwalian`, `stts`) VALUES
-('gnp-11/12', 'Genap 2011 - 2012', '2011-09-24', '2011-07-23', '2012-09-30', '1');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+(1, 'Ganjil 2012-2013', '2011-09-24', '2011-07-23', '2012-09-30', '1'),
+(2, 'Genap 2011 - 2012', '2011-09-24', '2011-07-23', '2012-09-30', '0');

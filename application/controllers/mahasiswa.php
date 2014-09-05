@@ -51,7 +51,8 @@ class Mahasiswa extends CI_Controller {
 			$bc['ipk'] = $this->web_app_model->getIpk($bc['nim'],$bc['smt_skr']-1);
 			$bc['dosen_wali'] = $this->web_app_model->getDosenWali($bc['nim']);
 			$bc['tahun_ajaran'] = $this->web_app_model->getTahunAjaran();
-			$bc['detail_krs'] = $this->web_app_model->getDetailKrs($bc['nim']);
+			$bc['kd_tahun'] = $this->web_app_model->getKdTahunAjaran();
+			$bc['detail_krs'] = $this->web_app_model->getDetailKrs($bc['nim'], $bc['kd_tahun']);
 			$bc['beban_studi'] = beban_studi($bc['ipk']);
 			$bc['menu'] = $this->load->view('mahasiswa/menu', '', true);
 			$bc['bio'] = $this->load->view('mahasiswa/bio', $bc, true);
@@ -120,6 +121,7 @@ class Mahasiswa extends CI_Controller {
 		{
 			$nim = $this->input->post('nim');
 			$smt = $this->input->post('semester');
+			$kd_tahun = $this->input->post('kd_tahun');
 			$detailfrs = $this->input->post('detailfrs');
 			if($detailfrs!="")
 			{
@@ -128,6 +130,7 @@ class Mahasiswa extends CI_Controller {
 					'tgl_perwalian' => date("Y-m-d"),
 					'tgl_persetujuan' => "",
 					'status' => "0",
+					'kd_tahun' => $kd_tahun,
 					'semester' => $smt);
 				$data_detail=array();
 				$temp=explode("|", $detailfrs);

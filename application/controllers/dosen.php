@@ -45,7 +45,7 @@ class Dosen extends CI_Controller {
 			$bc['kd_dosen'] = $this->session->userdata('kd_dosen');
 			$bc['menu'] = $this->load->view('dosen/menu', '', true);
 			$bc['bio'] = $this->load->view('dosen/bio', $bc, true);
-			$bc['mhs'] = $this->web_app_model->getMahasiswaBimbingan($bc['kd_dosen']);
+			$bc['mhs'] = $this->web_app_model->getMahasiswaBimbingan($bc['kd_dosen'],$this->web_app_model->getKdTahunAjaran());
 			
 			$this->load->view('global/bg_top',$d);
 			$this->load->view('dosen/bg_persetujuan',$bc);
@@ -79,7 +79,7 @@ class Dosen extends CI_Controller {
 				$bc['kelas_program'] = $dm->kelas_program;
 			}
 			
-			$bc['detailfrs'] = $this->web_app_model->getDetailKrsPersetujuan($bc['nim'],$bc['kelas_program']);
+			$bc['detailfrs'] = $this->web_app_model->getDetailKrsDisetujui($bc['nim'],$bc['kelas_program'],$this->web_app_model->getKdTahunAjaran());
 			
 			$this->load->view('dosen/bg_detail_krs',$bc);
 		}
@@ -196,7 +196,7 @@ class Dosen extends CI_Controller {
 				$bc['kelas_program'] = $dm->kelas_program;
 			}
 			
-			$bc['detailfrs'] = $this->web_app_model->getDetailKrsPersetujuan($nim,$bc['kelas_program']);
+			$bc['detailfrs'] = $this->web_app_model->getDetailKrsPersetujuan($nim,$bc['kelas_program'],$this->web_app_model->getKdTahunAjaran());
 			$bc['khs'] = $this->web_app_model->getNilai($nim);
 			
 			$this->load->view('global/bg_top',$d);

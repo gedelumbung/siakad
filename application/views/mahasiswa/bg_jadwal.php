@@ -98,6 +98,7 @@ function PilihMataKuliah(chk) {
 		<td>NIM</td>
 		<td><input name="nim" value="<?php echo $nim; ?>" type="text" readonly="readonly"  size="35" class="input-read-only"/></td>
 		<td>Semester, Tahun Ajaran</td>
+		<input type="hidden" name="kd_tahun" value="<?php echo $kd_tahun; ?>">
 		<td><input name="smstr_thn_ajaran" value="<?php echo $tahun_ajaran; ?>" type="text" readonly="readonly"  size="35" class="input-read-only" /></td>
 	</tr>
 	<tr>

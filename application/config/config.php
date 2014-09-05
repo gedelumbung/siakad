@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://freelance.dev/krs/';
+$config['base_url']	= 'http://gedesumawijaya.kd.io/siakad/';
 //$config['base_url']	= 'http://krs.gedelumbung.com/';
 
 /*

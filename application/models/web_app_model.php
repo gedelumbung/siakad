@@ -186,6 +186,17 @@ class Web_App_Model extends CI_Model {
 		return $ket;
 	}
 	
+	//query mengambil id tahun ajaran
+	public function getKdTahunAjaran()
+	{
+		$q = $this->db->query("select kd_tahun from tbl_thn_ajaran where stts='1'");
+ 		$ket="";
+		foreach($q->result() as $value){
+			$ket = $value->kd_tahun;
+		}
+		return $ket;
+	}
+	
 	//query untuk mengambil semester maksimal
 	public function getSemesterMax($nim)
 	{
@@ -200,22 +211,22 @@ class Web_App_Model extends CI_Model {
 	}
 	
 	//query untuk mengambil detail krs
-	public function getDetailKrs($nim)
+	public function getDetailKrs($nim, $kd_tahun)
 	{
 		$q = $this->db->query("SELECT a.nim,hasil.kapasitas,hasil.semester,hasil.kelas,
 		hasil.kd_mk,hasil.jum_sks,hasil.kd_jadwal,c.nama_mahasiswa,hasil.nama_mk,hasil.nama_dosen,hasil.jadwal,
 		SUM(CASE status WHEN 1 THEN 1 ELSE 0 END ) AS Peserta, 
 		SUM(CASE status WHEN 0 THEN 1 ELSE 0 END ) AS CalonPeserta from tbl_perwalian_header a 
 		left join 
-		(select det.kelas,
+		(select det.kelas, det.kd_tahun,
 		det.semester,det.kapasitas,det.kd_mk,det.jum_sks,det.kd_jadwal,det.nama_mk,det.nama_dosen,det.jadwal,k.nim from tbl_perwalian_detail k 
 		left join 
-		(select w.kelas,x.semester,w.kapasitas,x.kd_mk,x.jum_sks,w.kd_jadwal,x.nama_mk,y.nama_dosen,w.jadwal from tbl_jadwal w 
+		(select w.kelas,x.semester,w.kapasitas,x.kd_mk,x.jum_sks,w.kd_jadwal,x.nama_mk,y.nama_dosen,w.jadwal,w.kd_tahun from tbl_jadwal w 
 		left join tbl_mk x on w.kd_mk=x.kd_mk 
 		left join tbl_dosen y on  w.kd_dosen=y.kd_dosen) as det 
 		on k.kd_jadwal=det.kd_jadwal) as hasil on a.nim=hasil.nim
 		left join tbl_mahasiswa c on a.nim=c.nim
-		where a.nim='".$nim."' group by hasil.kd_jadwal");
+		where a.nim='".$nim."' and hasil.kd_tahun='".$kd_tahun."' group by hasil.kd_jadwal");
 		return $q;
 	}
 	
@@ -223,17 +234,17 @@ class Web_App_Model extends CI_Model {
 	public function getJadwal($nim,$kelas_program,$semester)
 	{
 		return $this->db->query('SELECT 
-		a.kd_jadwal,b.nama_mk,b.kd_mk,b.semester,b.jum_sks,a.kapasitas,a.kelas,c.kd_dosen,a.jadwal,d.Peserta,d.CalonPeserta,c.nama_dosen FROM 
+		a.kd_jadwal,b.nama_mk,b.kd_mk,b.semester,b.jum_sks,a.kapasitas,a.kelas,c.kd_dosen,a.jadwal,d.Peserta,d.CalonPeserta,c.nama_dosen, d.kd_tahun FROM 
 		`tbl_jadwal` a 
 		left join tbl_mk b on a.kd_mk=b.kd_mk 
 		left join tbl_dosen c on a.kd_dosen=c.kd_dosen 
 		left join (
-		SELECT kd_jadwal,detail.kelas_program,
+		SELECT kd_jadwal,detail.kelas_program, detail.kd_tahun,
 		SUM(CASE status WHEN 1 THEN 1 ELSE 0 END ) AS Peserta, 
 		SUM(CASE status WHEN 0 THEN 1 ELSE 0 END ) AS CalonPeserta
 		FROM tbl_perwalian_header
 		LEFT JOIN 
-		(select k.kd_jadwal,l.kelas_program,l.kd_mk,k.nim from tbl_perwalian_detail k left join tbl_jadwal l on k.kd_jadwal=l.kd_jadwal)  as detail
+		(select k.kd_jadwal,l.kelas_program,l.kd_mk,k.nim, l.kd_tahun from tbl_perwalian_detail k left join tbl_jadwal l on k.kd_jadwal=l.kd_jadwal)  as detail
 		ON tbl_perwalian_header.nim = detail.nim group by kd_jadwal
 		) as d
 		on a.kd_jadwal=d.kd_jadwal order by b.kd_mk, b.semester ASC');
@@ -309,7 +320,7 @@ class Web_App_Model extends CI_Model {
 	}
 	
 	//query mengambil mahasiswa yang diampu oleh dosen beserta jumlah sks yang diambil
-	function getMahasiswaBimbingan($kd_dosen) {
+	function getMahasiswaBimbingan($kd_dosen,$kd_tahun) {
 		$q = $this->db->query("SELECT a.nim,b.nama_mahasiswa,c.j_sks,b.jurusan,b.kelas_program,e.status from tbl_dosen_wali a 
 		left join tbl_mahasiswa b on a.nim=b.nim
 		left join 
@@ -317,7 +328,7 @@ class Web_App_Model extends CI_Model {
 		(select x.kd_jadwal, y.jum_sks from tbl_jadwal x left join tbl_mk y on x.kd_mk=y.kd_mk)
 		as l on k.kd_jadwal=l.kd_jadwal) c on a.nim=c.nim
 		left join tbl_perwalian_header e on a.nim=e.nim
-		where a.kd_dosen='".$kd_dosen."' group by a.nim");
+		where a.kd_dosen='".$kd_dosen."' and e.kd_tahun='".$kd_tahun."' group by a.nim");
 		return $q;
 	}
 	
@@ -363,7 +374,7 @@ class Web_App_Model extends CI_Model {
 	}
 	
 	//query mengambil detail krs untuk disetujui
-	function getDetailKrsPersetujuan($nim,$program) {
+	function getDetailKrsPersetujuan($nim,$program,$kd_tahun) {
 		$q = $this->db->query("SELECT kd_jadwal,
 		kd_mk,
 		nama_mk,
@@ -392,7 +403,42 @@ class Web_App_Model extends CI_Model {
 		) b on a.nim=b.nim
 		
 		left join tbl_mahasiswa c on a.nim=c.nim
-		where a.nim='".$nim."' and kd_mk NOT IN (select kd_mk from tbl_nilai where nim='".$nim."')
+		where a.nim='".$nim."' and a.kd_tahun='".$kd_tahun."' and kd_mk NOT IN (select kd_mk from tbl_nilai where nim='".$nim."')
+		group by kd_jadwal");
+		return $q;
+	}
+	
+	//query mengambil detail krs untuk diinputkan nilainya
+	function getDetailKrsDisetujui($nim,$program,$kd_tahun) {
+		$q = $this->db->query("SELECT kd_jadwal,
+		kd_mk,
+		nama_mk,
+		b.semester,
+		jum_sks,
+		nama_dosen,
+		kd_dosen,
+		b.kelas,
+		b.jadwal,
+		b.kapasitas,
+		a.nim,
+		Peserta,
+		CalonPeserta,
+		status
+		 FROM tbl_perwalian_header a left join 
+		(select det.kd_jadwal,x.nim,det.nama_dosen,det.kd_dosen,det.nama_mk,det.jum_sks,det.kd_mk,det.semester,det.kelas,det.jadwal,det.kapasitas,det.Peserta,det.CalonPeserta from tbl_perwalian_detail x left join
+		 
+		(select k.kd_jadwal,m.nama_dosen,m.kd_dosen,l.nama_mk,l.jum_sks,l.kd_mk,l.semester,k.kelas,k.jadwal,k.kapasitas,d.Peserta,d.CalonPeserta from tbl_jadwal k left join tbl_mk l on k.kd_mk=l.kd_mk left join tbl_dosen m on k.kd_dosen=m.kd_dosen
+		
+		left join
+		(select o.nim,p.kd_jadwal,
+				SUM(CASE status WHEN 1 THEN 1 ELSE 0 END ) AS Peserta, 
+				SUM(CASE status WHEN 0 THEN 1 ELSE 0 END ) AS CalonPeserta from tbl_perwalian_header o left join tbl_perwalian_detail p on o.nim=p.nim group by p.kd_jadwal) d on k.kd_jadwal=d.kd_jadwal
+		) det
+		on x.kd_jadwal=det.kd_jadwal
+		) b on a.nim=b.nim
+		
+		left join tbl_mahasiswa c on a.nim=c.nim
+		where a.nim='".$nim."'
 		group by kd_jadwal");
 		return $q;
 	}
