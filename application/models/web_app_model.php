@@ -234,8 +234,7 @@ class Web_App_Model extends CI_Model {
 		FROM tbl_perwalian_header
 		LEFT JOIN 
 		(select k.kd_jadwal,l.kelas_program,l.kd_mk,k.nim from tbl_perwalian_detail k left join tbl_jadwal l on k.kd_jadwal=l.kd_jadwal)  as detail
-		ON tbl_perwalian_header.nim = detail.nim 
-		where detail.kelas_program="'.$kelas_program.'" group by kd_jadwal
+		ON tbl_perwalian_header.nim = detail.nim group by kd_jadwal
 		) as d
 		on a.kd_jadwal=d.kd_jadwal order by b.kd_mk, b.semester ASC');
 	}

@@ -28,9 +28,9 @@
 			echo $menu;
 		?>
 		<div class="cleaner_h10"></div>
-		<table border="1" cellpadding="5" cellspacing="0" width="100%" style="border-collapse: collapse;">
+		<table border="1" cellpadding="4" cellspacing="0" width="100%" style="border-collapse: collapse;">
 		<tr bgcolor="#FFFFFF" align="center">
-		<td height=27>No.</td><td>NIM</td><td>Nama Mahasiswa</td><td>Jurusan</td><td>Program Kelas</td><td>Status Persetujuan</td><td>SKS</td><td width=75>Detail KRS</td>
+		<td height=27>No.</td><td>NIM</td><td>Nama Mahasiswa</td><td>Jurusan</td><td>Program Kelas</td><td>Status Persetujuan</td><td>Cek Detail</td>
 		</tr>
 		<?php
 			$no=1;
@@ -59,7 +59,7 @@
 					<td align="center">'.$no.'</td><td>'.$k['nim'].'</td><td>'.$k['nama_mahasiswa'].'</td><td>'.$k['jurusan'].'</td><td align="center">
 					'.$k['kelas_program'].'</td><td align="center">'.$st.'</td>';
 		
-					echo'<td>'.$k['j_sks'].'</td><td>
+					echo'<td>
 					<a class="link" href="'.$link.'" title="Detail Kartu Rencana Studi - '.$k[
 					'nama_mahasiswa'].'" rel="'.$cf.'">Cek Detail</a></td>
 					</tr>';
